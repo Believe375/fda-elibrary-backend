@@ -1,0 +1,171 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f7fa;
+  color: #222;
+}
+
+/* Header */
+.admin-header {
+  background-color: #003366;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 4px solid #ffcc00;
+  text-align: center;
+}
+
+.admin-logo {
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+/* Title block */
+.admin-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-title h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.admin-title p {
+  margin: 5px 0 0;
+  font-size: 15px;
+  color: #ffcc00;
+  font-weight: 500;
+}
+
+/* Main content */
+.admin-main {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+/* Sections */
+.admin-form-section,
+.admin-books-section {
+  background-color: #fff;
+  padding: 25px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.admin-form-section h2,
+.admin-books-section h2 {
+  margin-top: 0;
+  color: #003366;
+  font-size: 20px;
+  margin-bottom: 15px;
+  border-left: 4px solid #003366;
+  padding-left: 10px;
+}
+
+/* Form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+form input,
+form select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #003366;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+form button:hover {
+  background-color: #002244;
+}
+
+/* Book List */
+#booksList {
+  margin-top: 20px;
+}
+
+.book-item {
+  padding: 12px 10px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fafafa;
+  border-left: 4px solid #003366;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.book-item span {
+  flex: 1;
+  font-size: 15px;
+  color: #003366;
+}
+
+.book-item a {
+  text-decoration: none;
+  color: #0066cc;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.book-item button {
+  background-color: #cc0000;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.book-item button:hover {
+  background-color: #990000;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .admin-title h1 {
+    font-size: 22px;
+  }
+
+  .admin-title p {
+    font-size: 14px;
+  }
+
+  .book-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .book-item span,
+  .book-item a,
+  .book-item button {
+    margin-top: 5px;
+  }
+}
