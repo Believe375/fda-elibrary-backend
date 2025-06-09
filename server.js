@@ -5,11 +5,9 @@ const dotenv = require('dotenv');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const path = require('path');
-const fs = require('fs');
-const routes = require('./routes'); // Combined routes index
+const routes = require('./routes');
 
 dotenv.config();
-
 const app = express();
 const PORT = process.env.PORT || 5500;
 
@@ -19,38 +17,34 @@ app.use(express.json());
 app.use(helmet());
 app.use(morgan('dev'));
 
-// Serve uploaded files (e.g., book files)
+// Serve uploaded PDF files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Serve frontend static files
+// Serve all static frontend files
 app.use(express.static(path.join(__dirname, 'frontend')));
 
-// API routes
+// Mount API routes
 app.use('/api', routes);
 
-// SPA fallback (support client-side routing on Netlify or Render)
-app.get('*', (req, res) => {
-  const requestedPath = path.join(__dirname, 'frontend', req.path);
-  if (fs.existsSync(requestedPath) && requestedPath.endsWith('.html')) {
-    res.sendFile(requestedPath);
-  } else {
-    res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
-  }
+// Serve admin dashboard at /admin
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'admin', 'index.html'));
 });
 
-// Connect to MongoDB and start the server
-mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+// Fallback: serve main index.html for any unknown frontend route
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+});
+
+// Start server after connecting to DB
+mongoose.connect(process.env.MONGO_URI)
   .then(() => {
-    console.log(' MongoDB connected successfully');
+    console.log('MongoDB connected');
     app.listen(PORT, () => {
-      console.log(` Server running on port ${PORT}`);
+      console.log(`Server live on port ${PORT}`);
     });
   })
-  .catch((err) => {
-    console.error(' MongoDB connection error:', err.message);
+  .catch(err => {
+    console.error('DB connection error:', err);
     process.exit(1);
   });
